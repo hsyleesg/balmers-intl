@@ -209,43 +209,57 @@
 
     /* ===== Hero ===== */
     .hero {
-      background: linear-gradient(rgba(20,20,20,0.65), rgba(20,20,20,0.55)), url('../images/hero-bg.jpg') center/cover no-repeat;
-      padding: 100px 60px 80px;
-      text-align: center;
-      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      padding: 60px;
+      background: #fff;
     }
 
-    .hero h1 { color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
-    .hero .subtitle { color: rgba(255,255,255,0.9); }
-    .hero-stat { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 20px 28px; }
-    .hero-stat .number { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
-    .hero-stat .label { color: rgba(255,255,255,0.85); }
+    .hero-text {
+      flex: 1;
+    }
 
-    .hero h1 {
+    .hero-text h1 {
+      color: var(--text);
       margin-bottom: 20px;
-      color: var(--primary-dark);
     }
 
-    .hero .subtitle {
-      font-size: 20px;
+    .hero-text .subtitle {
+      font-size: 18px;
       color: var(--text-light);
-      margin-bottom: 40px;
-      line-height: 1.6;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-image {
+      flex: 1;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 20px;
     }
 
     .hero-stats {
       display: flex;
-      justify-content: center;
-      gap: 60px;
-      margin-top: 40px;
+      gap: 20px;
     }
 
     .hero-stat {
       text-align: center;
+      background: var(--primary-light);
+      border-radius: 12px;
+      padding: 20px 24px;
+      flex: 1;
     }
 
     .hero-stat .number {
-      font-size: 48px;
+      font-size: 36px;
       font-weight: 800;
       color: var(--primary);
       display: block;
@@ -253,7 +267,7 @@
     }
 
     .hero-stat .label {
-      font-size: 15px;
+      font-size: 13px;
       color: var(--text-light);
       margin-top: 8px;
     }
@@ -958,28 +972,33 @@
 
   <!-- ========== HERO ========== -->
   <section class="hero">
-    <h1>한의학으로 탈모의<br>근본 원인을 치료합니다</h1>
-    <p class="subtitle">
-      15년 이상, 전국 20개 지점, 누적 188만 건의 탈모 치료 경험<br>
-      발머스한의원의 건강한 탈모치료
-    </p>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="number">15+</span>
-        <span class="label">년 탈모 전문 치료</span>
+    <div class="hero-text">
+      <h1>한의학으로 탈모의<br>근본 원인을 치료합니다</h1>
+      <p class="subtitle">
+        15년 이상, 전국 20개 지점, 누적 188만 건의 탈모 치료 경험.<br>
+        발머스한의원의 건강한 탈모치료.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="number">15+</span>
+          <span class="label">년 전문 치료</span>
+        </div>
+        <div class="hero-stat">
+          <span class="number">20</span>
+          <span class="label">전국 지점</span>
+        </div>
+        <div class="hero-stat">
+          <span class="number">188만+</span>
+          <span class="label">누적 치료</span>
+        </div>
+        <div class="hero-stat">
+          <span class="number">10+</span>
+          <span class="label">학술 논문</span>
+        </div>
       </div>
-      <div class="hero-stat">
-        <span class="number">20</span>
-        <span class="label">전국 지점</span>
-      </div>
-      <div class="hero-stat">
-        <span class="number">188만+</span>
-        <span class="label">누적 치료 건수</span>
-      </div>
-      <div class="hero-stat">
-        <span class="number">3</span>
-        <span class="label">저서 출판 · 10+ 논문</span>
-      </div>
+    </div>
+    <div class="hero-image">
+      <img src="../images/hero-bg.jpg" alt="발머스한의원 의료진이 체열 분석 결과를 논의하고 있습니다">
     </div>
   </section>
 

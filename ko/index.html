@@ -156,6 +156,10 @@
       letter-spacing: -0.5px;
     }
 
+    .logo img {
+      height: 40px;
+    }
+
     .logo span {
       color: var(--accent);
       font-size: 14px;
@@ -205,10 +209,16 @@
 
     /* ===== Hero ===== */
     .hero {
-      background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg-warm) 100%);
+      background: linear-gradient(rgba(19,79,54,0.7), rgba(19,79,54,0.65)), url('../images/hero-bg.jpg') center/cover no-repeat;
       padding: 80px 60px;
       text-align: center;
+      color: #fff;
     }
+
+    .hero h1 { color: #fff; }
+    .hero .subtitle { color: rgba(255,255,255,0.9); }
+    .hero-stat .number { color: #fff; }
+    .hero-stat .label { color: rgba(255,255,255,0.8); }
 
     .hero h1 {
       margin-bottom: 20px;
@@ -806,6 +816,111 @@
       font-weight: 700;
     }
 
+    .method-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      background: var(--bg-light);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      padding: 16px;
+    }
+
+    /* ===== Before/After ===== */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    .case-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .case-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .case-images .img-wrap {
+      position: relative;
+    }
+
+    .case-images img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .case-images .img-label {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    .case-info {
+      padding: 16px;
+      font-size: 14px;
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    .case-disclaimer {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 32px;
+      margin-top: 40px;
+      font-size: 13px;
+      color: var(--text-lighter);
+      line-height: 2;
+    }
+
+    .case-disclaimer ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .case-disclaimer li::before {
+      content: '※ ';
+      color: var(--accent);
+    }
+
+    /* ===== Books ===== */
+    .books-section {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      margin-top: 40px;
+    }
+
+    .books-section img {
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    .books-section .books-text h3 {
+      margin-bottom: 12px;
+    }
+
+    .books-section .books-text p {
+      font-size: 15px;
+      color: var(--text-light);
+    }
+
     .trust-note {
       background: var(--accent-light);
       border-left: 4px solid var(--accent);
@@ -822,8 +937,7 @@
   <!-- ========== HEADER ========== -->
   <header class="header">
     <div class="logo">
-      발머스한의원
-      <span>Balmers Korean Medicine</span>
+      <img src="../images/logo.png" alt="발머스한의원 로고">
     </div>
     <nav class="nav">
       <a href="#about">소개</a>
@@ -1067,6 +1181,7 @@
     </div>
     <div class="methods-grid">
       <div class="method-card">
+        <img src="../images/program-1.png" alt="발머스 한약 처방">
         <h3>한약</h3>
         <div class="en-title">Herbal Medicine</div>
         <p>
@@ -1076,6 +1191,7 @@
         </p>
       </div>
       <div class="method-card">
+        <img src="../images/program-2.png" alt="침 치료 도구">
         <h3>침 치료</h3>
         <div class="en-title">Acupuncture</div>
         <p>
@@ -1085,6 +1201,7 @@
         </p>
       </div>
       <div class="method-card">
+        <img src="../images/yakchim.png" alt="약침 치료 도구">
         <h3>약침</h3>
         <div class="en-title">Pharmacopuncture</div>
         <p>
@@ -1094,6 +1211,7 @@
         </p>
       </div>
       <div class="method-card">
+        <img src="../images/program-3.png" alt="MTS 두피 관리 장비">
         <h3>두피 관리</h3>
         <div class="en-title">Scalp Care</div>
         <p>
@@ -1174,6 +1292,91 @@
         <div class="icon">&#x1F4C4;</div>
         <h4>비자 안내</h4>
         <p>장기 치료 시 의료 비자(C-3-3) 발급 안내를 도와드립니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TREATMENT CASES ========== -->
+  <section class="section warm-bg">
+    <div class="section-header">
+      <span class="tag">치료 사례</span>
+      <h2>발머스한의원 치료 사례</h2>
+      <p>실제 환자의 치료 경과입니다.</p>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-images">
+          <div class="img-wrap">
+            <img src="../images/case-1-before.png" alt="치료 전">
+            <span class="img-label">치료 전</span>
+          </div>
+          <div class="img-wrap">
+            <img src="../images/case-1-after.jpg" alt="치료 후">
+            <span class="img-label">치료 후</span>
+          </div>
+        </div>
+        <div class="case-info">정수리 탈모 — 치료 기간 6개월</div>
+      </div>
+      <div class="case-card">
+        <div class="case-images">
+          <div class="img-wrap">
+            <img src="../images/case-2-before.jpg" alt="치료 전">
+            <span class="img-label">치료 전</span>
+          </div>
+          <div class="img-wrap">
+            <img src="../images/case-2-after.jpg" alt="치료 후">
+            <span class="img-label">치료 후</span>
+          </div>
+        </div>
+        <div class="case-info">M자 탈모 — 치료 기간 8개월</div>
+      </div>
+      <div class="case-card">
+        <div class="case-images">
+          <div class="img-wrap">
+            <img src="../images/case-3-before.jpg" alt="치료 전">
+            <span class="img-label">치료 전</span>
+          </div>
+          <div class="img-wrap">
+            <img src="../images/case-3-after.jpg" alt="치료 후">
+            <span class="img-label">치료 후</span>
+          </div>
+        </div>
+        <div class="case-info">전체적 숱 감소 — 치료 기간 7개월</div>
+      </div>
+    </div>
+    <div class="case-disclaimer">
+      <ul>
+        <li>전·후 사진의 인물은 동일인입니다.</li>
+        <li>동일한 장소와 조명 등 동일 조건에서 촬영되었습니다.</li>
+        <li>개인의 상태에 따라 치료 결과가 달라질 수 있습니다.</li>
+        <li>해당 의료기관에서 진료받은 환자의 실제 치료 사례입니다.</li>
+        <li>사진상의 전·후 촬영 시기를 명시하였으며, 별도의 보정 처리를 하지 않았습니다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== BOOKS & RESEARCH ========== -->
+  <section class="section">
+    <div class="section-header">
+      <span class="tag">학술 성과</span>
+      <h2>연구와 출판</h2>
+    </div>
+    <div class="books-section">
+      <img src="../images/books.png" alt="발머스한의원 탈모 관련 저서 3권">
+      <div class="books-text">
+        <h3>저서 3권, 학술 논문 10편 이상</h3>
+        <p>
+          발머스한의원은 탈모 치료에 대한 임상 경험과 연구 결과를 학술적으로 정리하여 출판해왔습니다.
+        </p>
+        <p>
+          <strong>「인체 대사와 탈모」</strong> — 탈모의 근본 원인을 인체 대사의 관점에서 분석<br>
+          <strong>「머리를 식히면 탈모는 낫는다」</strong> — 두피열과 탈모의 관계, 27가지 생활 습관<br>
+          <strong>「혁신적 탈모이론 열성탈모」</strong> — 체열조절이상론에 기반한 새로운 탈모 치료 접근법
+        </p>
+        <p>
+          탈모 관련 학술 논문 10편 이상을 국내외 학회에 발표하였으며,
+          체열조절이상론, 발모검사법(BHT), 사진촬영법(BAP) 3건의 저작권을 등록하였습니다.
+        </p>
       </div>
     </div>
   </section>

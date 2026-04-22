@@ -697,6 +697,75 @@
       border-bottom-color: var(--gold-border);
     }
 
+    /* ===== Branch Cards (inline) ===== */
+    .branch-region { margin-bottom: 40px; }
+
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .branch-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      transition: all 0.3s;
+    }
+
+    .branch-card:hover {
+      border-color: var(--gold-border);
+      background: var(--bg-card-hover);
+    }
+
+    .branch-name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .branch-info {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 4px;
+    }
+
+    .branch-info strong { color: var(--text-primary); font-weight: 500; }
+
+    .branch-hours {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .region-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .region-btn:hover { border-color: var(--gold-border); color: var(--gold-light); }
+
+    .region-btn.active {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #0B0B0B;
+      border-color: transparent;
+      font-weight: 700;
+    }
+
     .step-badge {
       background: var(--gold-glow);
       color: var(--gold);
@@ -1104,6 +1173,7 @@
       .support-grid { grid-template-columns: 1fr 1fr; }
       .cases-grid { grid-template-columns: 1fr; }
       .channel-grid { grid-template-columns: 1fr; }
+      .branch-grid { grid-template-columns: 1fr; }
 
       /* Table scroll */
       .flow-table { font-size: 14px; }
@@ -1152,7 +1222,7 @@
   <section class="hero">
     <div class="container">
       <span class="hero-tag">Since 2009 &middot; 오직 탈모만을 진료합니다</span>
-      <h1>약은 증상을 멈춥니다.<br><span>한의학은 원인</span>을 찾습니다.</h1>
+      <h1>탈모는 결과입니다.<br><span>원인을 찾아야</span> 멈출 수 있습니다.</h1>
       <p class="subtitle">
         머리카락이 빠지는 건 결과입니다.<br>
         몸 안 어딘가에서 보내는 신호를 읽는 것.<br>
@@ -1444,62 +1514,204 @@
         <p>서울 강남에서 시작해 부산, 대구, 광주까지.<br>전국 20개 지점 어디서든 동일한 프로토콜로 진료합니다.</p>
       </div>
 
-      <table class="flow-table">
-        <thead>
-          <tr>
-            <th style="width:120px;">지역</th>
-            <th>지점</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="step-badge">서울</span></td>
-            <td><a href="branch.html#seoul">강남</a> · <a href="branch.html#seoul">잠실</a> · <a href="branch.html#seoul">홍대</a> · <a href="branch.html#seoul">노원</a> · <a href="branch.html#seoul">목동</a> · <a href="branch.html#seoul">종로성동</a></td>
-          </tr>
-          <tr>
-            <td><span class="step-badge">경기 · 인천</span></td>
-            <td><a href="branch.html#gyeonggi">분당</a> · <a href="branch.html#gyeonggi">일산</a> · <a href="branch.html#gyeonggi">수원</a> · <a href="branch.html#gyeonggi">안양</a> · <a href="branch.html#gyeonggi">부천</a> · <a href="branch.html#gyeonggi">안산</a> · <a href="branch.html#gyeonggi">인천</a></td>
-          </tr>
-          <tr>
-            <td><span class="step-badge">충청</span></td>
-            <td><a href="branch.html#chungcheong">천안</a></td>
-          </tr>
-          <tr>
-            <td><span class="step-badge">경상</span></td>
-            <td><a href="branch.html#gyeongsang">부산서면</a> · <a href="branch.html#gyeongsang">부산연산</a> · <a href="branch.html#gyeongsang">대구</a> · <a href="branch.html#gyeongsang">울산</a> · <a href="branch.html#gyeongsang">창원</a></td>
-          </tr>
-          <tr>
-            <td><span class="step-badge">전라</span></td>
-            <td><a href="branch.html#jeolla">광주</a></td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- Region Filter -->
+      <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:36px;" id="branchFilters">
+        <button class="region-btn active" data-region="all" onclick="filterBranch(this)">전체 20</button>
+        <button class="region-btn" data-region="seoul" onclick="filterBranch(this)">서울 6</button>
+        <button class="region-btn" data-region="gyeonggi" onclick="filterBranch(this)">경기·인천 7</button>
+        <button class="region-btn" data-region="chungcheong" onclick="filterBranch(this)">충청 1</button>
+        <button class="region-btn" data-region="gyeongsang" onclick="filterBranch(this)">경상 5</button>
+        <button class="region-btn" data-region="jeolla" onclick="filterBranch(this)">전라 1</button>
+      </div>
 
-      <div class="support-grid">
-        <div class="support-card">
-          <div class="icon">&#x1F3E5;</div>
-          <h4>동일 프로토콜</h4>
-          <p>어느 지점을 방문하든 같은 진단 체계, 같은 치료 기준으로 진료합니다.</p>
+      <!-- 서울 -->
+      <div class="branch-region" data-region="seoul">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border);">
+          <span class="step-badge">서울</span><span style="font-size:14px; color:var(--text-muted);">6개 지점</span>
         </div>
-        <div class="support-card">
-          <div class="icon">&#x1F4CB;</div>
-          <h4>진료 기록 공유</h4>
-          <p>이사나 출장으로 지점을 옮겨도, 진료 기록이 그대로 이어집니다.</p>
-        </div>
-        <div class="support-card">
-          <div class="icon">&#x1F555;</div>
-          <h4>진료 시간</h4>
-          <p>월~금 10:00-19:00, 토 10:00-15:00. 지점별로 다를 수 있으니 예약 시 확인해 주세요.</p>
-        </div>
-        <div class="support-card">
-          <div class="icon">&#x1F4DE;</div>
-          <h4>대표 전화</h4>
-          <p>1661-8501. 가까운 지점 안내와 예약을 한 번에 도와드립니다.</p>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4 class="branch-name">강남점</h4>
+            <div class="branch-info">📍 서울시 강남구 테헤란로 14길 6, 6층 2호</div>
+            <div class="branch-info">🚇 <strong>강남역 · 역삼역</strong> 인근</div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">잠실점</h4>
+            <div class="branch-info">📍 서울시 송파구 석촌동 158-2 석촌호수타워 7층 701호</div>
+            <div class="branch-info">🚇 <strong>2호선 잠실역 · 8호선 석촌역</strong></div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">홍대점</h4>
+            <div class="branch-info">📍 서울시 마포구 서교동 395-5 선진빌딩 5층</div>
+            <div class="branch-info">🚇 <strong>합정역 3번출구</strong> 도보 3분</div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">노원점</h4>
+            <div class="branch-info">📍 서울시 노원구 동일로 1339 대한빌딩 202호</div>
+            <div class="branch-info">🚇 <strong>7호선 중계역 6번출구</strong> 도보 5분</div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">목동점</h4>
+            <div class="branch-info">📍 서울시 양천구 신정동 888-46 청곡빌딩 3층</div>
+            <div class="branch-info">🚇 <strong>5호선 목동역 1번출구</strong> 도보 3분</div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">종로성동점</h4>
+            <div class="branch-info">📍 서울시 성동구 도선동 354 도선빌딩 3층</div>
+            <div class="branch-info">🚇 <strong>2호선 상왕십리역 3번출구</strong> 도보 1분</div>
+            <div class="branch-info">🅿️ 건물 1층 주차 (초진 2시간, 재진 1시간)</div>
+            <div class="branch-hours">월·화·금 11:00–19:30 · 목 14:00–21:00 · 토 10:00–16:30<br><span style="color:#e06060;">수·일 휴진</span></div>
+          </div>
         </div>
       </div>
 
-      <div style="text-align:center; margin-top:40px;">
-        <a href="branch.html" style="display:inline-block; background:linear-gradient(135deg, var(--gold), var(--gold-dark)); color:#0B0B0B; padding:14px 36px; border-radius:8px; text-decoration:none; font-weight:700; font-size:15px; transition:filter 0.3s;" onmouseover="this.style.filter='brightness(1.15)'" onmouseout="this.style.filter='none'">전국 20개 지점 상세 보기 →</a>
+      <!-- 경기·인천 -->
+      <div class="branch-region" data-region="gyeonggi">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border);">
+          <span class="step-badge">경기 · 인천</span><span style="font-size:14px; color:var(--text-muted);">7개 지점</span>
+        </div>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4 class="branch-name">분당점</h4>
+            <div class="branch-info">📍 경기 성남시 분당구 서현2동 246-2 신영팰리스타워 402, 403호</div>
+            <div class="branch-info">🚇 <strong>서현역 1번출구</strong> 도보 1분</div>
+            <div class="branch-info">🅿️ 건물 지하 주차장 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">일산점</h4>
+            <div class="branch-info">📍 경기도 고양시 일산동구 중앙로1261번길 55 효산캐슬 4층 403호</div>
+            <div class="branch-info">🚇 <strong>3호선 정발산역 1번출구</strong> 호수공원 방향</div>
+            <div class="branch-info">🅿️ 건물 지하 1~3층 무료주차</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">수원점</h4>
+            <div class="branch-info">📍 경기도 수원시 팔달구 인계동 1037 시안프라자 702호</div>
+            <div class="branch-info">🚇 <strong>수원시청역 8번출구</strong></div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">안양점</h4>
+            <div class="branch-info">📍 경기도 안양시 동안구 시민대로 187, 312호</div>
+            <div class="branch-info">🚇 <strong>범계역 1번출구</strong> 도보 4분</div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">부천점</h4>
+            <div class="branch-info">📍 경기도 부천시 원미구 중동 1141-2, 4층 404호</div>
+            <div class="branch-info">🚇 <strong>7호선 신중동역 3번출구</strong> 도보 1분</div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">안산점</h4>
+            <div class="branch-info">📍 경기도 안산시 단원구 광덕서로 86, 501호</div>
+            <div class="branch-info">🚇 <strong>4호선 고잔역 2번출구</strong> 도보 10분</div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">인천점</h4>
+            <div class="branch-info">📍 인천광역시 남동구 구월동 1451-5 유진빌딩 3층 301호</div>
+            <div class="branch-info">🚇 <strong>인천1호선 예술회관역 6번출구</strong></div>
+            <div class="branch-info">🅿️ 건물 내 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 충청 -->
+      <div class="branch-region" data-region="chungcheong">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border);">
+          <span class="step-badge">충청</span><span style="font-size:14px; color:var(--text-muted);">1개 지점</span>
+        </div>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4 class="branch-name">천안점</h4>
+            <div class="branch-info">📍 충청남도 천안시 동남구 신부동 462-5 RGB빌딩 10층 1001호</div>
+            <div class="branch-info">🚇 <strong>천안역 1번출구</strong> 약 15분 / 종합터미널 버스 하차</div>
+            <div class="branch-info">🅿️ 건물 내 기계식 주차장 (SUV 불가) · 랜드마크타워 3시간 무료</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 10:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 경상 -->
+      <div class="branch-region" data-region="gyeongsang">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border);">
+          <span class="step-badge">경상</span><span style="font-size:14px; color:var(--text-muted);">5개 지점</span>
+        </div>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4 class="branch-name">부산서면점</h4>
+            <div class="branch-info">📍 부산시 부산진구 중앙대로 747 그린메디컬센터 13층</div>
+            <div class="branch-info">🚇 <strong>서면역 15번출구</strong> 30m 직진, 도보 3분</div>
+            <div class="branch-info">🅿️ 지하 주차장 (대형 SUV 불가)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">부산연산점</h4>
+            <div class="branch-info">📍 부산시 연제구 중앙대로 1111 위드타워 6층</div>
+            <div class="branch-info">🚇 <strong>1·3호선 연산역 7번출구</strong> 10m 직진</div>
+            <div class="branch-info">🅿️ 동해주차장 (초진 2시간, 재진 1시간 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">대구점</h4>
+            <div class="branch-info">📍 대구광역시 수성구 만촌동 1037-7 월드메르디앙 상가 2층</div>
+            <div class="branch-info">🚇 <strong>2호선 만촌역 4번출구</strong> 도보 1분</div>
+            <div class="branch-info">🅿️ 건물 지하 1층 주차장 (내원 시 무료)</div>
+            <div class="branch-hours">평일 11:00–21:00 · 토 10:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">울산점</h4>
+            <div class="branch-info">📍 울산광역시 남구 달동 1325-11 레전드빌딩 301호</div>
+            <div class="branch-info">🚇 <strong>태화강역</strong> / KBS 방송국 버스 정류장 하차</div>
+            <div class="branch-info">🅿️ 건물 뒤 주차장 (내원 시 무료, 주차권 지참)</div>
+            <div class="branch-hours">화~금 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">월·수 휴진 · 일 휴진</span></div>
+          </div>
+          <div class="branch-card">
+            <h4 class="branch-name">창원점</h4>
+            <div class="branch-info">📍 경상남도 창원시 성산구 원이대로 678, 9층</div>
+            <div class="branch-info">🚇 시민생활체육관 정류장 버스 다수 이용</div>
+            <div class="branch-info">🅿️ 로데오 주차장 (내원 시 주차권 지급)</div>
+            <div class="branch-hours">월·화·금 10:30–19:00 (월 21시까지) · 목 14:00–21:00 · 토 09:00–16:00<br><span style="color:#e06060;">수 학술연구휴진 · 일·공휴일 휴진</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 전라 -->
+      <div class="branch-region" data-region="jeolla">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border);">
+          <span class="step-badge">전라</span><span style="font-size:14px; color:var(--text-muted);">1개 지점</span>
+        </div>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4 class="branch-name">광주점</h4>
+            <div class="branch-info">📍 광주 서구 상무중앙로 103, 307호</div>
+            <div class="branch-info">🚇 <strong>상무역 4번출구</strong> 도보 15분 / 한국국토정보공사 버스 하차 1분</div>
+            <div class="branch-info">🅿️ 건물 지하·지상 주차 가능 (내원 시 무료)</div>
+            <div class="branch-hours">평일 09:00–20:00 · 토 09:00–17:00<br><span style="color:#e06060;">수 학술연구휴진 · 일 휴진</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:40px; font-size:28px; font-weight:700; color:var(--gold);">
+        📞 1661-8501
+        <div style="font-size:14px; color:var(--text-muted); font-weight:400; margin-top:8px;">전 지점 대표 전화 · 가까운 지점 안내와 예약</div>
       </div>
     </div>
   </section>
@@ -1772,6 +1984,17 @@
     전화: +82-1661-8501 | 이메일: intl@balmers.co.kr<br><br>
     &copy; 2024 발머스한의원. All rights reserved.
   </footer>
+
+<script>
+function filterBranch(btn) {
+  document.querySelectorAll('#branchFilters .region-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var region = btn.dataset.region;
+  document.querySelectorAll('.branch-region').forEach(function(sec) {
+    sec.style.display = (region === 'all' || sec.dataset.region === region) ? '' : 'none';
+  });
+}
+</script>
 
 </body>
 </html>
